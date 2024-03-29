@@ -1,0 +1,33 @@
+name: Workflows
+
+on: [push, release]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    if: github.event_name == "push"
+    steps:
+      -
+        name: Test
+        run: cargo test
+      -
+        name: Build release
+        run: cargo b -r
+      - 
+        name: Test binary
+        run: exit 1
+
+  docker:
+    runs-on: ubuntu-latest
+    if: github.event_name == "release"
+    steps:
+      -
+        name: Login to Docker Hub
+        run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password  ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          file: docker/musl.Dockerfile
+          push: true
+          tags: thefunnymouse/app:latest

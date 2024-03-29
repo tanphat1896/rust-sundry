@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test only
-        run: echo ${{ github.ref }} ${{ github.ref_name }}
+        run: echo ${{ github.ref }} ${{ github.ref_name }} ";" ${{ github.event_name }} ";" ${{ github.event_path }}
       -
         name: Login to Docker Hub
         run: docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password  ${{ secrets.DOCKERHUB_TOKEN }}

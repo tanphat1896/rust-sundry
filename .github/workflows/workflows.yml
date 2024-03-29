@@ -21,7 +21,7 @@ jobs:
         run: cargo b -r
       - 
         name: Test binary
-        run: exit 1
+        run: ./target/release/rust-sundry fetch -v
 
   docker:
     runs-on: ubuntu-latest

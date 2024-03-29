@@ -5,7 +5,7 @@ on: [push, release]
 jobs:
   verify:
     runs-on: ubuntu-latest
-    if: github.event_name == "push"
+    if: github.event_name == 'push'
     steps:
       -
         name: Test
@@ -19,7 +19,7 @@ jobs:
 
   docker:
     runs-on: ubuntu-latest
-    if: github.event_name == "release"
+    if: github.event_name == 'release'
     steps:
       -
         name: Login to Docker Hub
